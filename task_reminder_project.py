@@ -11,6 +11,8 @@ def timeto24h(t,m):
     if m=='pm' and temp!=12:
         temp+=12
         return str(temp)+':'+str(t.split(':')[1])+':00'
+    elif m=='am' and temp==12:
+        return "00"+':'+str(t.split(':')[1])+':00'
     else:
         return t
 
@@ -33,7 +35,7 @@ if __name__ == "__main__":
                 title=row['task'],
                 message="You probably have missed a task to do: \n"+row['task'],
                 app_name="Task Reminder ",
-                app_icon="bell_plus.ico",
+                app_icon="Schedule.ico",
                 timeout=10
             )
             continue
@@ -50,7 +52,7 @@ if __name__ == "__main__":
             title=row['task'],
             message="You have a task to do: \n"+row['task'],
             app_name="Task Reminder ",
-            app_icon="bell_plus.ico",
+            app_icon="Schedule.ico",
             timeout=7
         )
         time.sleep(1)
