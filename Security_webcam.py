@@ -1,4 +1,3 @@
-from sys import flags
 import cv2
 import numpy as np
 import face_recognition
