@@ -1,4 +1,3 @@
-from pickle import TRUE
 from sys import flags
 import cv2
 import numpy as np
