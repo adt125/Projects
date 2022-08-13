@@ -4,9 +4,9 @@ from datetime import datetime
 from openpyxl import load_workbook
 from plyer import notification
 def timeto24h(t,m):
-    '''
-    This function will clean the time and convert it to 24 hours time.
-    '''
+    
+    #This function will convert 12 hours time to 24 hours time.
+    
     temp = int(t.split(':')[0])
     if m=='pm' and temp!=12:
         temp+=12
