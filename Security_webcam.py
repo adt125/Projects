@@ -13,6 +13,14 @@ def encode(images):
         enclist.append(enc)
     return enclist
 
+def time_difference(time_stamp):
+    temp_date=datetime.strptime(time_stamp,'%d/%m/%Y %H:%M:%S')
+    curr=datetime.now()
+    diff=curr-temp_date
+    ans=int(diff.total_seconds()*1000)
+    return ans
+
+    
 def logins(name):
     with open('login_details.csv','r+') as f:
         data=f.readlines()
@@ -30,19 +38,18 @@ def logins(name):
             dstr=datetime.now().strftime('%d/%m/%Y')
             f.writelines(f'\n{name}\t{tstr}\t{dstr}')
         else:
-            for line in data:
-                if line.split('\t')[0] == name:
-                    time_obj=datetime.strptime(line.split['t'][1],'%H:%M:%S')
-                    curr_time=datetime.now()
-                    if curr_time-time_obj >= 60000:
-                        tstr=datetime.now().strftime('%H:%M:%S')
-                        dstr=datetime.now().strftime('%d/%m/%Y')
-                        f.writelines(f'\n{name}\t{tstr}\t{dstr}')
-
+            last_index = len(names) - names[::-1].index(name) - 1
+            line=data[last_index]
+            time_stamp=str(line.split('\t')[2]) + " " + str(line.split('\t')[1])
+            diff=time_difference(time_stamp)
+            if diff >= 60000:
+                tstr=datetime.now().strftime('%H:%M:%S')
+                dstr=datetime.now().strftime('%d/%m/%Y')
+                f.writelines(f'\n{name}\t{tstr}\t{dstr}')
             
 
 
-print("Initialising...please wait")
+print("Initialising... please wait")
 known_faces=[]
 known_names=[]
 path='Images'
@@ -112,7 +119,7 @@ while timer>0:
     if cur-t>=1:
         t=cur
         timer=timer-1
-    if cv2.waitKey(10)==13:
+    if cv2.waitKey(10)==13: #press enter to close
         break
 cap.release()
 cv2.destroyAllWindows()
