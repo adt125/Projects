@@ -29,6 +29,17 @@ def logins(name):
             tstr=datetime.now().strftime('%H:%M:%S')
             dstr=datetime.now().strftime('%d/%m/%Y')
             f.writelines(f'\n{name}\t{tstr}\t{dstr}')
+        else:
+            for line in data:
+                if line.split('\t')[0] == name:
+                    time_obj=datetime.strptime(line.split['t'][1],'%H:%M:%S')
+                    curr_time=datetime.now()
+                    if curr_time-time_obj >= 60000:
+                        tstr=datetime.now().strftime('%H:%M:%S')
+                        dstr=datetime.now().strftime('%d/%m/%Y')
+                        f.writelines(f'\n{name}\t{tstr}\t{dstr}')
+
+            
 
 
 print("Initialising...please wait")
